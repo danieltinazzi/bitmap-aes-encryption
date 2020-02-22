@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p This tool encrypt a message inside a bitmap image
+  img.image(src=imageData, width=200, height=200)
+  h4 Text stored in the image:
+  p #{decoded}
+  h4 Link to this image:
+  a(href=imageUrl) #{imageUrl.substr(0, 50)}...
+  h4 Usage:
+  p /decode?image=data:image/bmp;base64,...
+  p /encode?text=abc...
