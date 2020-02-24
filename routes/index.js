@@ -85,27 +85,27 @@ router.get('/', function(req, res, next) {
 
     const decodedHex = decryptImage(imageBase64);
     const decodedText = Buffer.from(decodedHex, 'hex').toString('utf8');
-    const imageUrl = '/decode?image=' + encodeURIComponent(imageBase64);
+    const imageUrl = '/decode/' + encodeURIComponent(imageBase64);
     
     res.render('index', { title: 'Bitmap encryption', imageUrl : imageUrl, imageData : imageBase64, decoded : decodedText });
 });
 
-router.get('/decode', function (req, res, next) {
-    const imageBase64 = decodeURIComponent(req.query.image);
+router.get('/decode/:image', function (req, res, next) {
+    const imageBase64 = decodeURIComponent(req.params.image);
 
     const decodedHex = decryptImage(imageBase64);
     const decodedText = Buffer.from(decodedHex, 'hex').toString('utf8');
-    const imageUrl = '/decode?image=' + encodeURIComponent(imageBase64);
+    const imageUrl = '/decode/' + encodeURIComponent(imageBase64);
     
     res.render('index', { title: 'Bitmap encryption', imageUrl : imageUrl, imageData : imageBase64, decoded : decodedText });
 });
 
-router.get('/encode', function (req, res, next) {
-    const text = req.query.text;
+router.get('/encode/:text', function (req, res, next) {
+    const text = req.params.text;
     const hex = Buffer.from(text, 'utf-8').toString('hex');
 
     const imageBase64 = encryptImage(hex);
-    const imageUrl = '/decode?image=' + encodeURIComponent(imageBase64);
+    const imageUrl = '/decode/' + encodeURIComponent(imageBase64);
 
     res.render('index', { title: 'Bitmap encryption', imageUrl : imageUrl, imageData : imageBase64, decoded : text });
 });
