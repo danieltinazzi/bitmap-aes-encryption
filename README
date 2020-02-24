@@ -5,5 +5,8 @@ Usage:
 > npm install
 > npm start
 
-http://localhost:3000/decode?image=data:image/bmp;base64,...
-http://localhost:3000/encode?text=abc...
+http://localhost:3000/encode/text_to_encode
+http://localhost:3000/decode/base64_image_to_decode
+(base64 image should be URI encoded to escape special characters)
+Example:
+http://localhost:3000/decode/data%3Aimage%2Fbmp%3Bbase64%2CQk3CAAAAAAAAADYAAAAoAAAABgAAAAcAAAABABgAAAAAABAAAAATCwAAEwsAAAAAAAAAAAAAoAAAALkhgHjdQpJm5v9XsNCNAAC%2FbB0wJZpN6QmbLyYnln%2FCSc4AAE%2FYOILiWlSUPADhEfab%2BlQpQwAA9o7Mf5wLbyEyLSS%2F7lXS3lTzAAA9v5hsKfbdLWYoGdZqb%2Bb8A7UAANahrqtHFSElcJgt2AIJwpTN9gAAfnOrcA9pP3EAAAAAAAAAAAAAAAA%3D
