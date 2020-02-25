@@ -81,40 +81,33 @@ function fromHex32(hex) {
     return parseInt(hex.match(/.{1,2}/g).reverse().join(''), 16);
 }
 
-router.get('/', function(req, res, next) {
-
-    const text = 'Hi, this text will be crypted with aes256 and stored in a bitmap image';
-    const hex = Buffer.from(text, 'utf-8').toString('hex');
-
-    const imageBase64 = encryptImage(hex);
+function get(params) {
+    
+    let imageBase64;
+    if (params.image) {
+        imageBase64 = decodeURIComponent(params.image);
+    } else {
+        const hex = Buffer.from(params.text, 'utf-8').toString('hex');
+        imageBase64 = encryptImage(hex);
+    }
 
     const decodedHex = decryptImage(imageBase64);
     const decodedText = Buffer.from(decodedHex, 'hex').toString('utf8');
     const imageUrl = '/decode/' + encodeURIComponent(imageBase64);
-    
-    res.render('index', { title: 'Bitmap encryption', imageUrl : imageUrl, imageData : imageBase64, decoded : decodedText });
+
+    return { imageUrl : imageUrl, imageData : imageBase64, decoded : decodedText };
+}
+
+router.get('/', function(req, res, next) {
+    res.render('index', get({ text : 'Hi, this text will be crypted with aes256 and stored in a bitmap image' }));
 });
 
 router.get('/decode/:image', function (req, res, next) {
-    
-    const imageBase64 = decodeURIComponent(req.params.image);
-
-    const decodedHex = decryptImage(imageBase64);
-    const decodedText = Buffer.from(decodedHex, 'hex').toString('utf8');
-    const imageUrl = '/decode/' + encodeURIComponent(imageBase64);
-    
-    res.render('index', { title: 'Bitmap encryption', imageUrl : imageUrl, imageData : imageBase64, decoded : decodedText });
+    res.render('index', get(req.params));
 });
 
 router.get('/encode/:text', function (req, res, next) {
-    
-    const text = req.params.text;
-    const hex = Buffer.from(text, 'utf-8').toString('hex');
-
-    const imageBase64 = encryptImage(hex);
-    const imageUrl = '/decode/' + encodeURIComponent(imageBase64);
-
-    res.render('index', { title: 'Bitmap encryption', imageUrl : imageUrl, imageData : imageBase64, decoded : text });
+    res.render('index', get(req.params));
 });
 
 module.exports = router;
