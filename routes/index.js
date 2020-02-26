@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
+const password = 'Password used to generate key';
 
 function encryptImage(hex) {
-    const password = 'Password used to generate key';
 
     // Encryption
     const salt = crypto.randomBytes(16).toString('hex');
@@ -44,7 +44,6 @@ function encryptImage(hex) {
 }
 
 function decryptImage(imageBase64) {
-    const password = 'Password used to generate key';
     
     // Bitmap decoding
     const imageHex = Buffer.from(imageBase64.split(',', 2)[1], 'base64').toString('hex');
