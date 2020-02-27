@@ -12,6 +12,7 @@ http://localhost:3000/decode/base64_image_to_decode
 
 Encoding example:
 http://localhost:3000/encode/supersecretpassword123
+
 Decoding example:
 http://localhost:3000/decode/data%3Aimage%2Fbmp%3Bbase64%2CQk3CAAAAAAAAADYAAAAoAAAABgAAAAcAAAABABgAAAAAABAAAAATCwAAEwsAAAAAAAAAAAAAoAAAALkhgHjdQpJm5v9XsNCNAAC%2FbB0wJZpN6QmbLyYnln%2FCSc4AAE%2FYOILiWlSUPADhEfab%2BlQpQwAA9o7Mf5wLbyEyLSS%2F7lXS3lTzAAA9v5hsKfbdLWYoGdZqb%2Bb8A7UAANahrqtHFSElcJgt2AIJwpTN9gAAfnOrcA9pP3EAAAAAAAAAAAAAAAA%3D
 
