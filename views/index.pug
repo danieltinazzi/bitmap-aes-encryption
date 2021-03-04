@@ -1,13 +1,43 @@
 extends layout
 
 block content
-  h1 Bitmap encryption
-  p This tool encrypt a message inside a bitmap image
-  img.image(src=imageData, width=200, height=200)
-  h4 Text stored in the image:
-  p #{decoded}
-  h4 Link to this image:
-  a(href=imageUrl) #{imageUrl.substr(0, 50)}...
-  h4 Usage:
-  p /decode/base64_image_to_decode
-  p /encode/text_to_encode
+  
+  script(type='text/javascript').
+
+    function encode() {
+      text = document.getElementById('text').value;
+      if (text)
+        window.location.assign('/encode/' + encodeURIComponent(text));
+    }
+
+    function decode() {
+      image = document.getElementById('image').files[0];
+      if (image) {
+        var reader = new FileReader();
+        reader.onloadend = function() {
+          window.location.assign('/decode/' + encodeURIComponent(reader.result));
+        }
+        reader.readAsDataURL(image);
+      }
+    }
+
+  h2 Encrypted bitmap image
+  img.image(id='encrypted-image', src=imageData, width=200, height=200)
+  br
+  a(href=imageData download='image' onclick='this.download=(new Date()).toISOString().replace(/-|T|:/g,"")')
+    button Save this image
+  
+  h2(style='margin-top: 30px') Plain text stored in the image
+  p(id='plain-text', style='white-space: pre-wrap') #{decoded}
+
+  h2(style='margin-top: 30px') Encrypt your text
+  textarea(id='text', style='width:400px')
+  br
+  button(onclick='encode()', style='margin-top:2px') Encode
+
+  h2(style='margin-top: 30px') Decrypt your image
+  input(id='image', type='file')
+  button(onclick='decode()', style='margin-left:5px') Decode
+
+  h2(style='margin-top: 30px')
+    a(href='/about') Read more

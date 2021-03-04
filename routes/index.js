@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
-const password = 'Password used to generate key';
+const password = 'w3ak_def@ult_passw0rd'; // you should change this
 
 function encryptImage(hex) {
 
@@ -98,7 +98,7 @@ function get(params) {
 }
 
 router.get('/', function(req, res, next) {
-    res.render('index', get({ text : 'Hi, this text will be crypted with aes256 and stored in a bitmap image' }));
+    res.render('index', get({ text : 'Hi, this text will be crypted with aes256 and stored in a bitmap image.' }));
 });
 
 router.get('/decode/:image', function (req, res, next) {
@@ -107,6 +107,10 @@ router.get('/decode/:image', function (req, res, next) {
 
 router.get('/encode/:text', function (req, res, next) {
     res.render('index', get(req.params));
+});
+
+router.get('/about', function(req, res, next) {
+    res.render('about');
 });
 
 module.exports = router;

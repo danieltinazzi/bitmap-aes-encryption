@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    
+    h1 Bitmap encryption tool
+
+    
+    p This tool encrypt/decrypt text in a bitmap image using aes256 
+    p It is written in JavaScript and it runs on NodeJS
+     
+    h3 Usage:
+    p 1. Change the default encryption/decryption password in routes/index.js
+    p 2. > npm install
+    p 3. > npm start
+
+    h3 On your browser:
+    p http://localhost:3000/
+    p You can encrypt text and decrypt images directly from the web interface.
+
+    h3 URL usage:
+    p http://localhost:3000/encode/text_to_encode
+    p http://localhost:3000/decode/base64_image_to_decode
+    p (base64 image should be URI encoded to escape special characters)
+
+    h3 Encoding example:
+    a(href='http://localhost:3000/encode/supersecretpassword123') http://localhost:3000/encode/supersecretpassword123
+
+    h3 Decoding example:
+    a(href='http://localhost:3000/decode/data%3Aimage%2Fbmp%3Bbase64%2CQk1%2BAAAAAAAAADYAAAAoAAAABAAAAAYAAAABABgAAAAAABAAAAATCwAAEwsAAAAAAAAAAAAAQAAAAIiPDuRv2LtIqkxhmcs6sqSd1n627K%2FXXPxhEuq3EVYGED%2BVrlR3sRQoeDX%2F1jGgKhYn5VvW7jSvRVfNO7ZDVHQAAAAA') http://localhost:3000/decode/data%3Aimage%2Fbmp%3Bbase64%2CQk1%2BAAAAA...
+
+    p You can even pass base64 images to the encoding function if you want to crypt your images and save them on your drive.
+
+    p Warning: saving the bitmap image on cloud services may cause image compression and the encoded information will be loss.
